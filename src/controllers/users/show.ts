@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 
 import { User } from 'orm/entities/users/User';
@@ -10,7 +10,8 @@ export const show = async (req: Request, res: Response, next: NextFunction) => {
   const userRepository = getRepository(User);
   try {
     const user = await userRepository.findOne(id, {
-      select: ['id', 'username', 'name', 'email', 'role', 'language', 'created_at', 'updated_at'],
+      select: ['id', 'username', 'name', 'email', 'role', 'language', 'created_at', 'updated_at', 'posts'],
+      relations: ['posts'],
     });
 
     if (!user) {

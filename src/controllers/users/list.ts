@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 
 import { User } from 'orm/entities/users/User';
@@ -8,7 +8,8 @@ export const list = async (req: Request, res: Response, next: NextFunction) => {
   const userRepository = getRepository(User);
   try {
     const users = await userRepository.find({
-      select: ['id', 'username', 'name', 'email', 'role', 'language', 'created_at', 'updated_at'],
+      select: ['id', 'username', 'name', 'email', 'role', 'language', 'created_at', 'updated_at', 'posts'],
+      relations: ['posts'],
     });
     res.customSuccess(200, 'List of users.', users);
   } catch (err) {
