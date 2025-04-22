@@ -10,7 +10,7 @@ const config: ConnectionOptions = {
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
   synchronize: false,
-  logging: true,
+  logging: false,
   entities: ['src/orm/entities/**/*.ts'],
   migrations: ['src/orm/migrations/**/*.ts'],
   subscribers: ['src/orm/subscriber/**/*.ts'],
